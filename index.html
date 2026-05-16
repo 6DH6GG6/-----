@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -108,11 +107,10 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 
 /* ════ تصغير البوابة قليلاً ════ */
 #three-canvas{
-  position:absolute;z-index:4;
+  position:absolute;inset:0;z-index:4;
   width:78%!important;height:65%!important;
   top:8%!important;
-  left:50%!important;
-  transform:translateX(-50%);
+  left:11%!important;
   cursor:pointer;transition:transform .4s ease;}
 
 /* العنوان فوق البوابة */
@@ -858,7 +856,7 @@ function initThree(){
     requestAnimationFrame(animate);
     if(doorsOpening){
       doorAngle=Math.min(doorAngle+DOOR_SPEED,OPEN_ANGLE);
-      if(doorL) doorL.rotation.y =  doorAngle;
+      if(doorL) doorL.rotation.y = -doorAngle;
       if(doorR) doorR.rotation.y =  doorAngle;
       if(backGlow) backGlow.intensity=(doorAngle/OPEN_ANGLE)*4;
     }
@@ -873,6 +871,11 @@ function loadGLB(){
     model.traverse(c=>{
       if(c.name==='Door_L')doorL=c;
       if(c.name==='Door_R')doorR=c;
+      if(c.isMesh&&c.material){
+        /* لون أسود مع إطار بنفسجي */
+        c.material.color.set(0x000000);
+        c.material.emissive.set(0x1a0033);
+        c.material.needsUpdate=true;}
     });
     const box=new THREE.Box3().setFromObject(model);
     const sz=box.getSize(new THREE.Vector3());
@@ -886,12 +889,16 @@ function loadGLB(){
 }
 
 function buildFallback(){
-  /* مادة افتراضية بدون تغيير اللون */
+  /* مادة سوداء مع حواف بنفسجية */
   const mat=new THREE.MeshStandardMaterial({
-    roughness:.25,metalness:.9,side:THREE.DoubleSide});
+    color:0x000000,
+    emissive:0x220044,
+    roughness:.15,metalness:.95,side:THREE.DoubleSide});
 
-  /* إطار البوابة */
+  /* إطار البوابة — بنفسجي */
   const frameMat=new THREE.MeshStandardMaterial({
+    color:0x1a0033,
+    emissive:0x660099,
     roughness:.1,metalness:1,side:THREE.DoubleSide});
 
   /* الإطار العلوي */
@@ -921,38 +928,35 @@ function buildFallback(){
   doorR.position.set(1.3,0,.07);
   scene.add(doorR);
 
+  /* خطوط بنفسجية على الأبواب */
+  const edgeMat=new THREE.MeshStandardMaterial({color:0x000000,emissive:0x8800cc,roughness:.05,metalness:1});
+  [-1.3,1.3].forEach(x=>{
+    const eg=new THREE.BoxGeometry(.04,3.4,.12);
+    scene.add(Object.assign(new THREE.Mesh(eg,edgeMat),{position:new THREE.Vector3(x+(x<0?.02:-.02),0,.08)}));
+  });
+
   document.getElementById('btn-enter').classList.add('show');
 }
 
-/* ══ النقر على البوابة → 10 ثوانٍ برق ثم كلمة السر ══ */
+/* ══ النقر على البوابة → كلمة السر ══ */
 function onGateClick(){
+  const cv=document.getElementById('three-canvas');
+  cv.style.transform='scale(1.04)';
   document.getElementById('gate-glow').classList.add('lit');
   if(typeof YYY!=='undefined') YYY.startPurple();
   startGL();
-
-  /* برق كل ثانية لمدة 10 ثوانٍ */
   let lt=0;
   const lInt=setInterval(()=>{
-    lt+=.1;
-    const v=.5+Math.sin(lt*3)*.5;
-    redLights.forEach(l=>l.intensity=v*5);
-  },16);
-
-  /* إضافية: ومضات صاعقة قوية كل ثانية */
-  const flashInt=setInterval(()=>{
-    redLights.forEach(l=>l.intensity=8);
-    setTimeout(()=>redLights.forEach(l=>l.intensity=0),120);
-  },1000);
-
+    lt+=.1;const v=.5+Math.sin(lt*8)*.5;
+    redLights.forEach(l=>l.intensity=v*4);},16);
   setTimeout(()=>{
     clearInterval(lInt);
-    clearInterval(flashInt);
     redLights.forEach(l=>l.intensity=0);
     stopGL();
     if(typeof YYY!=='undefined') YYY.stop();
-    document.getElementById('gate-glow').classList.remove('lit');
+    cv.style.transform='scale(1)';
     showPW();
-  },10000);
+  },1600);
 }
 
 const CORRECT_PW='الظلام المتجمد';
@@ -1049,96 +1053,6 @@ if(typeof YYY==='undefined'){
     };
   })();
 }
-
-/* ══════════════════════════════════════
-   حماية الكونسول — تحذيرات فقط
-══════════════════════════════════════ */
-(function(){
-  /* رسائل تحذيرية مرئية عند فتح الكونسول */
-  const WARN = [
-    '%c⛩ KAGE NO TEIO — SYSTEM ALERT ⛩',
-    'color:#ff0000;font-size:22px;font-weight:900;text-shadow:0 0 8px red;background:#000;padding:8px 18px;border:2px solid #ff0000;border-radius:4px;'
-  ];
-  const LINE = [
-    '%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
-    'color:#660000;font-size:13px;'
-  ];
-  const MSG1 = [
-    '%c⚠ هذا المنطقة محمية — أي محاولة تلاعب ستُسجَّل',
-    'color:#ff4444;font-size:15px;font-weight:700;background:#0a0000;padding:4px 12px;'
-  ];
-  const MSG2 = [
-    '%c⚠ RESTRICTED ZONE — Tampering is detected & logged',
-    'color:#ff4444;font-size:15px;font-weight:700;background:#0a0000;padding:4px 12px;'
-  ];
-  const MSG3 = [
-    '%c✦ لا تحاول تجاوز البوابة — الظلام يراك ✦',
-    'color:#cc00cc;font-size:13px;font-style:italic;padding:4px 12px;'
-  ];
-
-  console.log(...WARN);
-  console.log(...LINE);
-  console.log(...MSG1);
-  console.log(...MSG2);
-  console.log(...MSG3);
-  console.log(...LINE);
-
-  /* اعتراض محاولات localStorage */
-  const _getItem = Storage.prototype.getItem;
-  const _setItem = Storage.prototype.setItem;
-
-  Storage.prototype.getItem = function(key){
-    if(key && (key.includes('empire') || key.includes('access') || key.includes('granted') || key.includes('gate'))){
-      warnAttempt('getItem', key);
-    }
-    return _getItem.apply(this, arguments);
-  };
-
-  Storage.prototype.setItem = function(key, value){
-    if(key && (key.includes('empire') || key.includes('access') || key.includes('granted') || key.includes('gate'))){
-      warnAttempt('setItem', key + ' = ' + value);
-      return; /* منع الكتابة */
-    }
-    return _setItem.apply(this, arguments);
-  };
-
-  function warnAttempt(method, detail){
-    console.log(...[
-      '%c🚨 محاولة اختراق مرفوضة 🚨',
-      'color:#fff;background:#cc0000;font-size:17px;font-weight:900;padding:6px 16px;border-radius:4px;'
-    ]);
-    console.log(...[
-      `%c✖ localStorage.${method}("${detail}") — ACCESS DENIED`,
-      'color:#ff6666;font-size:13px;font-weight:700;background:#1a0000;padding:4px 12px;'
-    ]);
-    console.log(...[
-      '%c⛩ البوابة لا تُفتح بالحيلة — فقط بالقوة الحقيقية ⛩',
-      'color:#9b30ff;font-size:12px;font-style:italic;padding:4px 12px;'
-    ]);
-  }
-
-  /* كشف فتح DevTools عبر تغيير حجم النافذة */
-  let devOpen = false;
-  setInterval(()=>{
-    const threshold = 160;
-    const widthDiff = window.outerWidth - window.innerWidth;
-    const heightDiff = window.outerHeight - window.innerHeight;
-    if((widthDiff > threshold || heightDiff > threshold) && !devOpen){
-      devOpen = true;
-      console.log(...[
-        '%c👁 تم رصد فتح أدوات المطور',
-        'color:#fff;background:#8b0000;font-size:16px;font-weight:900;padding:6px 16px;'
-      ]);
-      console.log(...[
-        '%c⚠ DevTools Detected — You are being watched',
-        'color:#ff4444;font-size:13px;background:#0a0000;padding:4px 12px;'
-      ]);
-    } else if(widthDiff <= threshold && heightDiff <= threshold){
-      devOpen = false;
-    }
-  }, 1000);
-
-})();
 
 /* ══ النص المتحرك ══ */
 const TEXTS=[
