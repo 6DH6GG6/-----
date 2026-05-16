@@ -33,7 +33,7 @@
       const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
           if (mutation.removedNodes.length > 0) {
-            SHIELD["network.js"].sendAlert(`⚠️ *[تنبيه تلاعب بالواجهة]* ⚠️\n\n👤 *الحدث:* محاولة تعديل أو حذف عناصر من واجهة العرض (DOM).`, "tamper");
+            SHIELD["network.js"].sendAlert(`⚠️ *[رادار طائفة الظلام]* ⚠️\n\n👤 *الحدث:* محاولة تلاعب خبيثة بالواجهة الأمامية وتخريب عناصر العرض الأصلية.`, "tamper");
           }
         });
       });
@@ -53,7 +53,7 @@
         const currentGlobals = Object.keys(window);
         if (currentGlobals.length > initialGlobals.length) {
           const leaked = currentGlobals.filter(x => !initialGlobals.includes(x));
-          SHIELD["network.js"].sendAlert(`⚠️ *[رادار الحقن النشط]* ⚠️\n\n👤 *الحدث:* تم رصد حقن متغيرات عالمية جديدة في الذاكرة:\n📝 *المتغيرات:* \`${leaked.join(', ')}\``, "tamper");
+          SHIELD["network.js"].sendAlert(`⚠️ *[رادار الحقن النشط]* ⚠️\n\n👤 *الحدث:* تم رصد حقن متغيرات غريبة في الذاكرة ومحاولة كسر القيود الإمبراطورية:\n📝 *الأدوات المرصودة:* \`${leaked.join(', ')}\``, "tamper");
         }
       }, 1000);
     },
@@ -62,7 +62,7 @@
       const originalTimeout = window.setTimeout;
       window.setTimeout = function(code, delay) {
         if (typeof code === 'string') {
-          SHIELD["network.js"].sendAlert(`⚠️ *[محاولة تنفيذ نصي]* ⚠️\n\n👤 *الحدث:* محاولة تمرير كود نصي عبر setTimeout.`, "tamper");
+          SHIELD["network.js"].sendAlert(`⚠️ *[حظر التنفيذ العشوائي]* ⚠️\n\n👤 *الحدث:* محاولة تمرير أكواد نصية مشبوهة ومحاولة تشغيلها في الخلفية.`, "tamper");
           return null;
         }
         return originalTimeout.apply(this, arguments);
@@ -85,14 +85,14 @@
         value: {
           setItem: function(key, value) {
             if (key === "empire_access") {
-              SHIELD["network.js"].sendAlert(`⚠️ *[تنبيه اختراق وتلاعب]* ⚠️\n\n👤 *الحدث:* محاولة تعديل أو حقن المفتاح المحمي \`empire_access\`\n📂 *عبر المكون:* SHIELD/storage_lock.js\n🚫 تم إيقاف العملية بنجاح.`, "tamper");
+              SHIELD["network.js"].sendAlert(`⚠️ *[تنبيه كسر الأقفال]* ⚠️\n\n👤 *الحدث:* محاولة تعديل أو حقن المفتاح المحمي التابع للعرش.\n🚫 تم سحق العملية بنجاح وإغلاق المنفذ.`, "tamper");
               return null;
             }
             return originalSetItem.apply(localStorage, arguments);
           },
           getItem: function(key) {
             if (key === "empire_access") {
-              SHIELD["network.js"].sendAlert(`⚠️ *[تنبيه اختراق وتلاعب]* ⚠️\n\n👤 *الحدث:* محاولة قراءة واستدعاء المفتاح المحمي \`empire_access\`\n📂 *عبر المكون:* SHIELD/storage_lock.js\n🚫 تم حجب القيمة وإرجاع فارغ.`, "tamper");
+              SHIELD["network.js"].sendAlert(`⚠️ *[تنبيه محاولة استطلاع]* ⚠️\n\n👤 *الحدث:* محاولة قراءة واستدعاء البيانات المشفرة الخاصة بالدخول.\n🚫 تم تضليل المتسلل وإرجاع قيمة فارغة.`, "tamper");
               return null;
             }
             return originalGetItem.apply(localStorage, arguments);
@@ -110,10 +110,10 @@
       detector.toString = function() {
         if (!observeAlertSent) {
           const msg = `.............................................\n` +
-                      `👑 *أيها الإمبراطور لظلال* 👑\n` +
+                      `👑 *أيها الإمبراطور للظلال* 👑\n` +
                       `هناك متسلل يراقب 👀❗\n\n` +
-                      `*نوع جهة التسلل:* Console ⛩️\n` +
-                      `*الملف المستدعى:* SHIELD/dev_detect.js\n` +
+                      `*نوع جهة التسلل:* كونسول المتصفح ⛩️\n` +
+                      `*الوضع الحالي:* تم رصد التحركات وبدء العزل النشط.\n` +
                       `.............................................`;
           SHIELD["network.js"].sendAlert(msg, "observe");
         }
@@ -182,7 +182,7 @@
         const blueStyle = "color: #00FFFF; font-size: 16px; font-weight: bold; text-shadow: 0 0 6px #00FFFF; background: #00111a; padding: 4px;";
         const greenStyle = "color: #39FF14; font-size: 15px; font-weight: bold; text-shadow: 0 0 6px #39FF14; background: #001a00; padding: 4px;";
 
-        console.log("%c🛡️ هنا درع مملكة طائفة الظلام 🛡️\n🛡️ لا يمكن لأي ذبابة أن تعبر 🛡️", redStyle);
+        console.log("%c♠🛡هنا درع مملكة ♠♦ طائفة الظلام ♦♠ /n لا يمكن لأي ذبابة أن تعب الجدار المظلم🛡♠", redStyle);
         console.log("%c👑 إمبراطوࢪ الظل 👑 يضع قيودًا على الدخلاء 🔥", purpleStyle);
         console.log("%c[📜] تم رصد معلوماتك ووضعها في قائمة مفصلة وتم ارسالها عبر تيليغرام لبوت الامبراطور", goldStyle);
         console.log("%c[💀] لا تحاول ارتكاب أي خطأ أو تقليد الامبراطور ظل فمحاولاتك بلا جدوى 🔥", blueStyle);
