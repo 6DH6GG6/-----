@@ -9,18 +9,18 @@ const app = express();
 
 app.use(express.json());
 
-// الإعدادات الحساسة تعتمد على رموز بيئية مخفية تماماً عن جيت هاب
+// وضع البيانات الحساسة بشكل مباشر لتفادي مشاكل الـ Environment Variables
 const SENSITIVE_CONFIG = {
-    token: process.env.TOKEN, // رمز توكن البوت المخفي
-    chatId: process.env.ID,    // رمز معرف الشات المخفي
-    secretCode: process.env.COD // كود التحقق الإضافي (إذا لزم الأمر)
+    token: "8117644349:AAHvnY5e-Q1yQuGY0J4iOOBl84Sa1rt_NP0", 
+    chatId: "7664410054",    
+    secretCode: "EMPIRE_SHIELD_2026" 
 };
 
 // استقبال الرسالة الجاهزة القادمة من shield.js وتمريرها فوراً
 app.post('/shield-send', async (req, res) => {
     const { message } = req.body;
 
-    // حماية إضافية: التحقق من وجود التوكن والمعرف في النظام قبل الإرسال
+    // التحقق من وجود الإعدادات
     if (!SENSITIVE_CONFIG.token || !SENSITIVE_CONFIG.chatId) {
         return res.status(500).json({ status: "Configuration missing" });
     }
@@ -40,12 +40,12 @@ app.post('/shield-send', async (req, res) => {
         });
         return res.status(200).json({ status: "delivered" });
     } catch (error) {
-        // حجب أخطاء تليجرام عن المتصفح لضمان عدم كشف البنية التحتية
+        // حجب تفاصيل الخطأ عن المتصفح لأمان البنية التحتية
         return res.status(500).json({ status: "failed" });
     }
 });
 
-// تشغيل السيرفر ليتوافق مع ريندر (Render)
+// تشغيل السيرفر ليتوافق مع ريندر (Render) أو أي منصة استضافة
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`[SHIELD GATEWAY] Secure server running on port ${PORT}`);
