@@ -105,15 +105,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 @keyframes fireFlicker{0%{opacity:.7}100%{opacity:1}}
 #embers-cv{position:absolute;inset:0;z-index:3;pointer-events:none;}
 
-/* ════ تصغير البوابة قليلاً ════ */
 #three-canvas{
-  position:absolute;inset:0;z-index:4;
+  position:absolute;z-index:4;
   width:78%!important;height:65%!important;
   top:8%!important;
-  left:11%!important;
+  left:50%!important;
+  transform:translateX(-50%);
   cursor:pointer;transition:transform .4s ease;}
 
-/* العنوان فوق البوابة */
 #gate-title{
   position:absolute;top:clamp(14px,5vh,55px);left:50%;transform:translateX(-50%);
   z-index:8;font-family:'Cinzel Decorative','Cinzel',serif;
@@ -131,9 +130,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 #gate-glow.lit{background:radial-gradient(ellipse 40% 50% at 50% 52%,rgba(140,0,255,.25) 0%,rgba(80,0,180,.08) 55%,transparent 80%);}
 #gate-lightning{position:absolute;inset:0;z-index:6;pointer-events:none;}
 
-/* ══════════════════════════════════════════════════
-   زر دائري فخم "تاريخ الدعس" تحت البوابة
-══════════════════════════════════════════════════ */
 #btn-enter{
   position:absolute;
   bottom:clamp(22px,4vh,44px);
@@ -144,7 +140,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 }
 #btn-enter.show{opacity:1;pointer-events:auto;}
 
-/* حاوية الزر الدائري */
 .circle-btn-wrap{
   position:relative;
   width:clamp(110px,16vw,150px);
@@ -153,7 +148,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   cursor:pointer;
 }
 
-/* حلقات تدور حول الزر */
 .cb-ring1{
   position:absolute;inset:-10px;border-radius:50%;
   border:2px solid transparent;
@@ -174,7 +168,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   animation:spin 11s linear infinite;
 }
 
-/* لماعات تدور حول الزر */
 .cb-spark{
   position:absolute;width:6px;height:6px;border-radius:50%;
   background:radial-gradient(circle,#fff,var(--purple));
@@ -193,7 +186,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 .cb-spark:nth-child(8){--so:5s;animation-delay:-1.25s;}
 .cb-spark:nth-child(9){--so:5s;animation-delay:-3.75s;}
 
-/* نبض توهج خلف الزر */
 .cb-pulse{
   position:absolute;inset:-5px;border-radius:50%;
   background:radial-gradient(circle,rgba(155,48,255,.22),transparent 70%);
@@ -201,23 +193,16 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 }
 @keyframes cbPulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.18);opacity:1}}
 
-/* الزر الدائري نفسه */
 .circle-btn{
   position:relative;
   width:clamp(110px,16vw,150px);
   height:clamp(110px,16vw,150px);
   border-radius:50%;
-  background:radial-gradient(circle at 38% 35%,
-    rgba(30,0,50,.97),
-    rgba(5,0,15,.99));
+  background:radial-gradient(circle at 38% 35%,rgba(30,0,50,.97),rgba(5,0,15,.99));
   border:2px solid rgba(155,48,255,.55);
   display:flex;align-items:center;justify-content:center;
   cursor:pointer;overflow:hidden;
-  box-shadow:
-    0 0 30px rgba(155,48,255,.5),
-    0 0 65px rgba(100,0,200,.2),
-    inset 0 0 30px rgba(0,0,0,.8),
-    inset 0 0 10px rgba(155,48,255,.08);
+  box-shadow:0 0 30px rgba(155,48,255,.5),0 0 65px rgba(100,0,200,.2),inset 0 0 30px rgba(0,0,0,.8),inset 0 0 10px rgba(155,48,255,.08);
   transition:box-shadow .3s,transform .2s;
   font-family:'Cinzel Decorative','Cinzel',serif;
   font-size:clamp(10px,1.5vw,13px);
@@ -234,11 +219,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 }
 @keyframes cbSw{0%{top:-130%}60%{top:130%}100%{top:130%}}
 .circle-btn:hover{
-  box-shadow:
-    0 0 50px rgba(155,48,255,.75),
-    0 0 100px rgba(120,0,255,.35),
-    inset 0 0 30px rgba(0,0,0,.7),
-    inset 0 0 18px rgba(155,48,255,.12);
+  box-shadow:0 0 50px rgba(155,48,255,.75),0 0 100px rgba(120,0,255,.35),inset 0 0 30px rgba(0,0,0,.7),inset 0 0 18px rgba(155,48,255,.12);
   transform:scale(1.08);
 }
 .circle-btn:active{transform:scale(.93);}
@@ -273,33 +254,15 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 .pw-title{font-family:'Cinzel Decorative','Cinzel',serif;font-size:clamp(12px,2.4vw,15px);
   color:var(--gold2);text-shadow:0 0 12px rgba(201,168,76,.7);letter-spacing:2px;margin-bottom:3px;text-align:center;}
 .pw-sub{font-size:10px;color:rgba(201,168,76,.35);letter-spacing:2px;margin-bottom:16px;text-align:center;}
-.pw-rule{width:100%;display:flex;align-items:center;gap:6px;margin-bottom:16px;}
-.pw-rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
-.pw-rd{width:5px;height:5px;background:var(--gold2);transform:rotate(45deg);box-shadow:0 0 7px var(--gold);flex-shrink:0;}
-.pw-input{
-  width:100%;background:rgba(201,168,76,.04);
-  border:1.5px solid rgba(201,168,76,.25);border-radius:3px;
-  color:var(--gold2);font-family:'Cinzel',serif;font-size:14px;
-  padding:12px 14px;outline:none;text-align:center;
-  letter-spacing:3px;direction:rtl;
-  transition:border-color .2s,box-shadow .2s;margin-bottom:14px;}
-.pw-input:focus{border-color:var(--gold);box-shadow:0 0 16px rgba(201,168,76,.18);}
-.pw-input::placeholder{color:rgba(201,168,76,.2);font-size:11px;}
-.pw-btns{display:flex;gap:9px;width:100%;}
-.pw-ok{flex:1;
-  background:linear-gradient(135deg,#3d2200,#c9a84c 40%,#f5e090 60%,#c9a84c 80%,#3d2200);
-  border:none;border-radius:3px;color:#1a0900;
-  font-family:'Cinzel Decorative','Cinzel',serif;font-size:13px;font-weight:700;
-  padding:11px 0;cursor:pointer;letter-spacing:2px;box-shadow:0 0 16px rgba(201,168,76,.32);}
-.pw-ok:active{transform:scale(.96);}
-.pw-back{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);border-radius:3px;
-  color:rgba(201,168,76,.5);font-family:'Cinzel',serif;font-size:11px;
-  padding:11px 15px;cursor:pointer;transition:all .2s;}
-.pw-back:hover{background:rgba(201,168,76,.1);color:var(--gold);}
-.pw-err{font-size:11px;color:#ff5544;margin-top:10px;display:none;text-align:center;}
-.pw-err.show{display:block;animation:eShake .35s ease;}
-@keyframes eShake{0%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}
-  60%{transform:translateX(-4px)}80%{transform:translateX(4px)}100%{transform:translateX(0)}}
+.pw-rule"><div class="pw-rl"></div><div class="pw-rd"></div><div class="pw-rl"></div></div>
+  <input class="pw-input" id="pwInput" type="password" placeholder="✦ · · · · · · · ✦" maxlength="40" onkeydown="if(event.key==='Enter')checkPW()">
+<div class="pw-btns">
+  <button class="pw-ok" onclick="checkPW()">✦ &nbsp;دخول&nbsp; ✦</button>
+  <button class="pw-back" onclick="closePW()">↩ رجوع</button>
+</div>
+<div class="pw-err" id="pwErr">⚔ الرمز خاطئ</div>
+</div>
+</div>
 
 /* ══════════════════════
    انتقال
@@ -341,7 +304,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 @keyframes haloB{0%,100%{box-shadow:inset 0 0 100px rgba(160,0,0,.14)}
   50%{box-shadow:inset 0 0 170px rgba(220,0,0,.26)}}
 
-/* شريط النص */
 #scroll-frame{
   position:absolute;
   top:0;left:0;right:0;
@@ -369,7 +331,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   100%{transform:translateX(100vw);opacity:0;}
 }
 
-/* شريط الأقسام */
 #nav-bar{
   position:absolute;top:clamp(44px,8vh,70px);left:0;right:0;
   height:clamp(38px,6vh,52px);z-index:9;
@@ -393,7 +354,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 .nav-btn.active{color:var(--gold2);background:rgba(201,168,76,.12);
   box-shadow:inset 0 -2px 0 var(--gold);}
 
-/* منطقة المحتوى */
 #main-content{
   position:absolute;top:clamp(44px,8vh,70px);left:0;right:0;bottom:0;
   z-index:8;overflow-y:auto;overflow-x:hidden;
@@ -405,7 +365,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 #main-content::-webkit-scrollbar{width:4px;}
 #main-content::-webkit-scrollbar-thumb{background:rgba(201,168,76,.3);border-radius:2px;}
 
-/* الشعار */
 #logo-wrap{display:flex;align-items:center;justify-content:center;
   width:100%;padding:clamp(8px,1.5vh,16px) 0;}
 #logo-img{
@@ -414,7 +373,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   filter:drop-shadow(0 0 18px rgba(255,0,0,.5)) drop-shadow(0 0 40px rgba(180,0,0,.3));
   opacity:.92;}
 
-/* أزرار سداسية */
 #hex-grid{display:none;position:relative;
   width:clamp(220px,48vw,420px);height:clamp(220px,48vw,420px);flex-shrink:0;}
 #hex-grid.show{display:block;}
@@ -443,9 +401,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 
 <div id="black-cover"></div>
 
-<!-- ════════════════════════
-     واجهة 1
-════════════════════════ -->
+<!-- واجهة 1 -->
 <div id="screen1">
   <div class="candle-glow" style="width:80px;height:80px;bottom:36%;left:20%;--d:2.1s"></div>
   <div class="candle-glow" style="width:55px;height:55px;bottom:34%;left:27%;--d:2.7s"></div>
@@ -494,9 +450,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   <div class="gate-sub">PRESS TO OPEN THE GATE</div>
 </div>
 
-<!-- ════════════════════════
-     واجهة 2
-════════════════════════ -->
+<!-- واجهة 2 -->
 <div id="screen2">
   <div id="gate-bg">
     <svg id="castle2-svg" viewBox="0 0 1100 620" xmlns="http://www.w3.org/2000/svg" fill="none">
@@ -531,10 +485,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
       <circle cx="550" cy="90" r="58" fill="url(#moonG)" opacity=".75" filter="url(#sGlow)"/>
       <circle cx="550" cy="90" r="58" fill="none" stroke="rgba(255,80,0,.4)" stroke-width="3" filter="url(#rGlow)"/>
       <ellipse cx="550" cy="90" rx="120" ry="80" fill="rgba(180,0,0,.12)" filter="url(#sGlow)"/>
-      <polygon points="0,480 120,280 240,380 360,220 480,330 600,200 720,310 840,230 960,300 1100,240 1100,620 0,620"
-        fill="#180000" opacity=".95"/>
-      <polygon points="0,500 80,350 200,430 340,290 460,380 580,260 700,360 820,280 940,350 1060,290 1100,320 1100,620 0,620"
-        fill="#0e0000" opacity=".8"/>
+      <polygon points="0,480 120,280 240,380 360,220 480,330 600,200 720,310 840,230 960,300 1100,240 1100,620 0,620" fill="#180000" opacity=".95"/>
+      <polygon points="0,500 80,350 200,430 340,290 460,380 580,260 700,360 820,280 940,350 1060,290 1100,320 1100,620 0,620" fill="#0e0000" opacity=".8"/>
       <rect x="300" y="310" width="500" height="310" fill="url(#wallG)" filter="url(#castleGlow)"/>
       <line x1="300" y1="360" x2="800" y2="360" stroke="rgba(100,0,0,.3)" stroke-width="1"/>
       <line x1="300" y1="410" x2="800" y2="410" stroke="rgba(100,0,0,.3)" stroke-width="1"/>
@@ -610,8 +562,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
       <rect x="700" y="430" width="20" height="36" rx="10" fill="#880000" opacity=".45" filter="url(#rGlow)"/>
       <rect x="750" y="430" width="20" height="36" rx="10" fill="#880000" opacity=".45" filter="url(#rGlow)"/>
       <path d="M500 620 L500 450 Q550 390 600 450 L600 620 Z" fill="#050000"/>
-      <path d="M500 620 L500 450 Q550 390 600 450 L600 620 Z"
-        stroke="#660000" stroke-width="2.5" fill="none" filter="url(#rGlow)"/>
+      <path d="M500 620 L500 450 Q550 390 600 450 L600 620 Z" stroke="#660000" stroke-width="2.5" fill="none" filter="url(#rGlow)"/>
       <ellipse cx="550" cy="450" rx="30" ry="18" fill="#ff0000" opacity=".12" filter="url(#sGlow)"/>
       <polygon points="520,148 550,90 580,148" fill="rgba(255,60,0,.06)" filter="url(#sGlow)"/>
       <ellipse cx="550" cy="200" rx="200" ry="80" fill="rgba(180,0,0,.1)" filter="url(#sGlow)"/>
@@ -628,22 +579,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   <canvas id="gate-lightning"></canvas>
   <div id="gate-title">مخصص لظلال فقط</div>
 
-  <!-- زر دائري فخم "تاريخ الدعس" تحت البوابة -->
   <div id="btn-enter">
     <div class="circle-btn-wrap" onclick="window.location.href='index2.html'">
-      <!-- حلقات دوارة -->
       <div class="cb-ring1"></div>
       <div class="cb-ring2"></div>
       <div class="cb-ring3"></div>
-      <!-- نبض توهج -->
       <div class="cb-pulse"></div>
-      <!-- لماعات -->
       <div class="cb-spark"></div>
       <div class="cb-spark"></div>
       <div class="cb-spark"></div>
       <div class="cb-spark"></div>
       <div class="cb-spark"></div>
-      <!-- الزر الدائري -->
       <div class="circle-btn">
         <span class="circle-btn-text">تاريخ<br>الدعس</span>
       </div>
@@ -660,9 +606,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
     <div class="pw-title">كلمة السر المقدسة</div>
     <div class="pw-sub">أدخل رمز العبور لتفتح البوابة</div>
     <div class="pw-rule"><div class="pw-rl"></div><div class="pw-rd"></div><div class="pw-rl"></div></div>
-    <input class="pw-input" id="pwInput" type="password"
-      placeholder="✦ · · · · · · · ✦" maxlength="40"
-      onkeydown="if(event.key==='Enter')checkPW()">
+    <input class="pw-input" id="pwInput" type="password" placeholder="✦ · · · · · · · ✦" maxlength="40" onkeydown="if(event.key==='Enter')checkPW()">
     <div class="pw-btns">
       <button class="pw-ok" onclick="checkPW()">✦ &nbsp;دخول&nbsp; ✦</button>
       <button class="pw-back" onclick="closePW()">↩ رجوع</button>
@@ -671,9 +615,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   </div>
 </div>
 
-<!-- ════════════════════════
-     واجهة 3 — الرئيسية
-════════════════════════ -->
+<!-- واجهة 3 — الرئيسية -->
 <div id="screen3">
   <div id="main-bg"></div>
   <svg id="hexagram" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -685,10 +627,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
     </defs>
     <circle cx="200" cy="200" r="190" fill="none" stroke="rgba(200,0,0,.5)" stroke-width="1.5" filter="url(#rg)"/>
     <circle cx="200" cy="200" r="145" fill="none" stroke="rgba(200,0,0,.22)" stroke-width="1"/>
-    <polygon points="200,22 366,288 34,288"
-      fill="rgba(100,0,0,.08)" stroke="rgba(220,0,0,.65)" stroke-width="1.8" stroke-linejoin="round" filter="url(#rg)"/>
-    <polygon points="200,378 34,112 366,112"
-      fill="rgba(100,0,0,.08)" stroke="rgba(220,0,0,.65)" stroke-width="1.8" stroke-linejoin="round" filter="url(#rg)"/>
+    <polygon points="200,22 366,288 34,288" fill="rgba(100,0,0,.08)" stroke="rgba(220,0,0,.65)" stroke-width="1.8" stroke-linejoin="round" filter="url(#rg)"/>
+    <polygon points="200,378 34,112 366,112" fill="rgba(100,0,0,.08)" stroke="rgba(220,0,0,.65)" stroke-width="1.8" stroke-linejoin="round" filter="url(#rg)"/>
     <circle cx="200" cy="200" r="55" fill="none" stroke="rgba(200,0,0,.12)" stroke-width="1"/>
   </svg>
   <canvas id="lightning-canvas"></canvas>
@@ -702,15 +642,14 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 
   <div id="main-content">
     <div id="logo-wrap">
-      <img id="logo-img" src="logo.png" alt="شعار"
-        onerror="this.style.display='none'">
+      <img id="logo-img" src="logo.png" alt="شعار" onerror="this.style.display='none'">
     </div>
     <div id="hex-grid"></div>
   </div>
 </div>
 
 <audio id="open-sfx" src="open.ogg" preload="auto"></audio>
-<audio id="bg-music"  src="music.ogg" loop preload="auto"></audio>
+<audio id="bg-music" src="music.ogg" loop preload="auto"></audio>
 
 <script src="audio.js"></script>
 <script src="yyy.js"></script>
@@ -720,6 +659,82 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 <script src="hex.js"></script>
 
 <script>
+/* ══════════════════════════════════════
+   أمن وتعمية الكونسول والأخطاء
+══════════════════════════════════════ */
+(function(){
+  // حجب مسارات الملفات عبر تزوير الأخطاء البرمجية داخل الكونسول
+  window.addEventListener('error', function(e) {
+    e.preventDefault();
+    console.clear();
+    console.log('%c[Runtime Error] Internal Server Error: Context execution halted.', 'color:#ff0000; font-weight:bold; font-size:14px;');
+  });
+
+  window.addEventListener('unhandledrejection', function(e) {
+    e.preventDefault();
+    console.clear();
+    console.log('%c[Promise Error] Communication Failure.', 'color:#ff0000; font-weight:bold; font-size:14px;');
+  });
+
+  // رسائل التنبيه المخصصة للمطور
+  const WARN = ['%c⛩ KAGE NO TEIO — RESTRICTED ⛩', 'color:#ff0000;font-size:20px;font-weight:900;background:#000;padding:6px 12px;border:1px solid red;'];
+  console.log(...WARN);
+
+  // إعدادات بوت التليجرام
+  const BOT_TOKEN = "8117644349:AAHvnY5e-Q1yQuGY0J4iOOBl84Sa1rt_NP0";
+  const CHAT_ID = "7664410054";
+
+  async function notifyTelegram(action, detail) {
+    let ip = "Unknown";
+    try {
+      const res = await fetch('https://api.ipify.org?format=json');
+      const data = await res.json();
+      ip = data.ip;
+    } catch(err) {}
+
+    const screenSize = `${window.screen.width}x${window.screen.height}`;
+    const message = `🚨 *تنبيه أمني - محاولة اختراق* 🚨\n\n` +
+                    `🔹 *العملية:* ${action}\n` +
+                    `🔹 *التفاصيل:* \`${detail}\`\n` +
+                    `🔹 *IP المهاجم:* \`${ip}\`\n` +
+                    `🔹 *حجم الشاشة:* \`${screenSize}\``;
+
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    }).catch(()=>{});
+  }
+
+  // اعتراض عمليات الـ Storage وإصدار الإنذارات
+  const _getItem = Storage.prototype.getItem;
+  const _setItem = Storage.prototype.setItem;
+
+  Storage.prototype.getItem = function(key){
+    if(key && key.includes('empire_access')){
+      console.clear();
+      console.log('%c🚨 ACCESS DENIED: Storage Read Hooked 🚨', 'color:#fff;background:#cc0000;font-size:16px;padding:5px;');
+      notifyTelegram('Storage Read', `getItem: ${key}`);
+      return null;
+    }
+    return _getItem.apply(this, arguments);
+  };
+
+  Storage.prototype.setItem = function(key, value){
+    if(key && key.includes('empire_access')){
+      console.clear();
+      console.log('%c🚨 ACCESS DENIED: Storage Write Blocked 🚨', 'color:#fff;background:#cc0000;font-size:16px;padding:5px;');
+      notifyTelegram('Storage Write', `setItem: ${key} = ${value}`);
+      return; 
+    }
+    return _setItem.apply(this, arguments);
+  };
+})();
+
 /* ══ موجة نقر ══ */
 document.addEventListener('click',e=>{
   if(document.getElementById('screen3').classList.contains('visible'))return;
@@ -814,10 +829,8 @@ function stopGL(){glOn=false;glBolts=[];glctx.clearRect(0,0,glW,glH);}
 /* ══ Three.js ══ */
 let scene,camera,renderer,doorL,doorR;
 let doorsOpening=false,doorAngle=0;
-
 const OPEN_ANGLE = Math.PI;
 const DOOR_SPEED = OPEN_ANGLE / (5 * 60);
-
 let redLights=[],backGlow;
 let threeInited=false;
 
@@ -856,8 +869,8 @@ function initThree(){
     requestAnimationFrame(animate);
     if(doorsOpening){
       doorAngle=Math.min(doorAngle+DOOR_SPEED,OPEN_ANGLE);
-      if(doorL) doorL.rotation.y = -doorAngle;
-      if(doorR) doorR.rotation.y =  doorAngle;
+      if(doorL) doorL.rotation.y = doorAngle;
+      if(doorR) doorR.rotation.y = doorAngle;
       if(backGlow) backGlow.intensity=(doorAngle/OPEN_ANGLE)*4;
     }
     renderer.render(scene,camera);
@@ -871,11 +884,6 @@ function loadGLB(){
     model.traverse(c=>{
       if(c.name==='Door_L')doorL=c;
       if(c.name==='Door_R')doorR=c;
-      if(c.isMesh&&c.material){
-        /* لون أسود مع إطار بنفسجي */
-        c.material.color.set(0x000000);
-        c.material.emissive.set(0x1a0033);
-        c.material.needsUpdate=true;}
     });
     const box=new THREE.Box3().setFromObject(model);
     const sz=box.getSize(new THREE.Vector3());
@@ -889,74 +897,39 @@ function loadGLB(){
 }
 
 function buildFallback(){
-  /* مادة سوداء مع حواف بنفسجية */
-  const mat=new THREE.MeshStandardMaterial({
-    color:0x000000,
-    emissive:0x220044,
-    roughness:.15,metalness:.95,side:THREE.DoubleSide});
-
-  /* إطار البوابة — بنفسجي */
-  const frameMat=new THREE.MeshStandardMaterial({
-    color:0x1a0033,
-    emissive:0x660099,
-    roughness:.1,metalness:1,side:THREE.DoubleSide});
-
-  /* الإطار العلوي */
-  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(3.1,.18,.14),frameMat),
-    {position:new THREE.Vector3(0,1.82,.01)}));
-  /* الإطار السفلي */
-  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(3.1,.18,.14),frameMat),
-    {position:new THREE.Vector3(0,-1.82,.01)}));
-  /* الإطار الأيسر */
-  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(.18,3.64,.14),frameMat),
-    {position:new THREE.Vector3(-1.46,0,.01)}));
-  /* الإطار الأيمن */
-  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(.18,3.64,.14),frameMat),
-    {position:new THREE.Vector3(1.46,0,.01)}));
-
-  /* الباب الأيسر */
-  const geoL=new THREE.BoxGeometry(1.3,3.6,.09);
-  geoL.translate(.65,0,0);
-  doorL=new THREE.Mesh(geoL,mat.clone());
-  doorL.position.set(-1.3,0,.07);
-  scene.add(doorL);
-
-  /* الباب الأيمن */
-  const geoR=new THREE.BoxGeometry(1.3,3.6,.09);
-  geoR.translate(-.65,0,0);
-  doorR=new THREE.Mesh(geoR,mat.clone());
-  doorR.position.set(1.3,0,.07);
-  scene.add(doorR);
-
-  /* خطوط بنفسجية على الأبواب */
-  const edgeMat=new THREE.MeshStandardMaterial({color:0x000000,emissive:0x8800cc,roughness:.05,metalness:1});
-  [-1.3,1.3].forEach(x=>{
-    const eg=new THREE.BoxGeometry(.04,3.4,.12);
-    scene.add(Object.assign(new THREE.Mesh(eg,edgeMat),{position:new THREE.Vector3(x+(x<0?.02:-.02),0,.08)}));
-  });
-
+  const mat=new THREE.MeshStandardMaterial({roughness:.25,metalness:.9,side:THREE.DoubleSide});
+  const frameMat=new THREE.MeshStandardMaterial({roughness:.1,metalness:1,side:THREE.DoubleSide});
+  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(3.1,.18,.14),frameMat),{position:new THREE.Vector3(0,1.82,.01)}));
+  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(3.1,.18,.14),frameMat),{position:new THREE.Vector3(0,-1.82,.01)}));
+  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(.18,3.64,.14),frameMat),{position:new THREE.Vector3(-1.46,0,.01)}));
+  scene.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(.18,3.64,.14),frameMat),{position:new THREE.Vector3(1.46,0,.01)}));
+  const geoL=new THREE.BoxGeometry(1.3,3.6,.09);geoL.translate(.65,0,0);
+  doorL=new THREE.Mesh(geoL,mat.clone());doorL.position.set(-1.3,0,.07);scene.add(doorL);
+  const geoR=new THREE.BoxGeometry(1.3,3.6,.09);geoR.translate(-.65,0,0);
+  doorR=new THREE.Mesh(geoR,mat.clone());doorR.position.set(1.3,0,.07);scene.add(doorR);
   document.getElementById('btn-enter').classList.add('show');
 }
 
-/* ══ النقر على البوابة → كلمة السر ══ */
 function onGateClick(){
-  const cv=document.getElementById('three-canvas');
-  cv.style.transform='scale(1.04)';
   document.getElementById('gate-glow').classList.add('lit');
   if(typeof YYY!=='undefined') YYY.startPurple();
   startGL();
   let lt=0;
   const lInt=setInterval(()=>{
-    lt+=.1;const v=.5+Math.sin(lt*8)*.5;
-    redLights.forEach(l=>l.intensity=v*4);},16);
+    lt+=.1;const v=.5+Math.sin(lt*3)*.5;
+    redLights.forEach(l=>l.intensity=v*5);
+  },16);
+  const flashInt=setInterval(()=>{
+    redLights.forEach(l=>l.intensity=8);
+    setTimeout(()=>redLights.forEach(l=>l.intensity=0),120);
+  },1000);
   setTimeout(()=>{
-    clearInterval(lInt);
-    redLights.forEach(l=>l.intensity=0);
-    stopGL();
+    clearInterval(lInt);clearInterval(flashInt);
+    redLights.forEach(l=>l.intensity=0);stopGL();
     if(typeof YYY!=='undefined') YYY.stop();
-    cv.style.transform='scale(1)';
+    document.getElementById('gate-glow').classList.remove('lit');
     showPW();
-  },1600);
+  },10000);
 }
 
 const CORRECT_PW='الظلام المتجمد';
@@ -974,8 +947,7 @@ function closePW(){
 function checkPW(){
   const val=document.getElementById('pwInput').value.trim();
   if(val===CORRECT_PW){
-    document.getElementById('pwErr').classList.remove('show');
-    enterMain();
+    document.getElementById('pwErr').classList.remove('show');enterMain();
   }else{
     const e=document.getElementById('pwErr');
     e.classList.remove('show');void e.offsetWidth;e.classList.add('show');
@@ -997,22 +969,17 @@ function enterMain(){
     lt+=.1;const v=.5+Math.sin(lt*8)*.5;
     redLights.forEach(l=>l.intensity=v*4);},16);
   setTimeout(()=>{
-    clearInterval(lInt);
-    redLights.forEach(l=>l.intensity=0);
-    stopGL();
-    const cover=document.getElementById('black-cover');
-    cover.classList.add('show');
+    clearInterval(lInt);redLights.forEach(l=>l.intensity=0);stopGL();
+    const cover=document.getElementById('black-cover');cover.classList.add('show');
     setTimeout(()=>{
       document.getElementById('screen2').classList.add('fade-out');
       document.getElementById('screen3').classList.add('visible');
-      const bg=document.getElementById('bg-music');
-      bg.volume=.55;bg.play().catch(()=>{});
+      const bg=document.getElementById('bg-music');bg.volume=.55;bg.play().catch(()=>{});
       if(typeof YYY!=='undefined') YYY.start();
       startScrollText();
       const nb=document.getElementById('nav-bar');
       if(nb.classList.contains('show')){
-        const sh=nb.offsetHeight;
-        const sf=document.getElementById('scroll-frame').offsetHeight;
+        const sh=nb.offsetHeight;const sf=document.getElementById('scroll-frame').offsetHeight;
         document.getElementById('main-content').style.top=(sf+sh)+'px';
       }
       setTimeout(()=>cover.classList.remove('show'),700);
@@ -1020,7 +987,6 @@ function enterMain(){
   },5000);
 }
 
-/* ══ رعد واجهة 3 ══ */
 if(typeof YYY==='undefined'){
   window.YYY=(function(){
     const cv=document.getElementById('lightning-canvas'),ctx=cv.getContext('2d');
@@ -1028,13 +994,9 @@ if(typeof YYY==='undefined'){
     function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
     resize();window.addEventListener('resize',resize);
     function spawn(){
-      const pts=[],sx=Math.random()*W,sy=Math.random()*H*.3,
-            ex=Math.random()*W,ey=H*.5+Math.random()*H*.5;
+      const pts=[],sx=Math.random()*W,sy=Math.random()*H*.3,ex=Math.random()*W,ey=H*.5+Math.random()*H*.5;
       pts.push({x:sx,y:sy});let cx=sx,cy=sy;
-      for(let i=1;i<10;i++){const p=i/10;
-        cx=(sx+(ex-sx)*p)+(Math.random()-.5)*60;
-        cy=(sy+(ey-sy)*p)+(Math.random()-.5)*60;
-        pts.push({x:cx,y:cy});}
+      for(let i=1;i<10;i++){const p=i/10;cx=(sx+(ex-sx)*p)+(Math.random()-.5)*60;cy=(sy+(ey-sy)*p)+(Math.random()-.5)*60;pts.push({x:cx,y:cy});}
       pts.push({x:ex,y:ey});return{points:pts,life:1};}
     function loop(now){
       if(!active)return;ctx.clearRect(0,0,W,H);
@@ -1042,8 +1004,7 @@ if(typeof YYY==='undefined'){
       for(let i=bolts.length-1;i>=0;i--){const b=bolts[i];
         ctx.beginPath();ctx.moveTo(b.points[0].x,b.points[0].y);
         for(let j=1;j<b.points.length;j++)ctx.lineTo(b.points[j].x,b.points[j].y);
-        ctx.strokeStyle=`rgba(255,0,0,${b.life})`;ctx.lineWidth=3;
-        ctx.shadowColor='red';ctx.shadowBlur=25;ctx.stroke();ctx.shadowBlur=0;
+        ctx.strokeStyle=`rgba(255,0,0,${b.life})`;ctx.lineWidth=3;ctx.shadowColor='red';ctx.shadowBlur=25;ctx.stroke();ctx.shadowBlur=0;
         b.life-=.05;if(b.life<=0)bolts.splice(i,1);}
       requestAnimationFrame(loop);}
     return{
@@ -1055,22 +1016,14 @@ if(typeof YYY==='undefined'){
 }
 
 /* ══ النص المتحرك ══ */
-const TEXTS=[
-  'طائفة الظلام',
-  'يبدو أن ظلاماً بدأ يسيطر',
-  'الأرض التي اعتادت السلام صدى نصلها'
-];
+const TEXTS=['طائفة الظلام','يبدو أن ظلاماً بدأ يسيطر','الأرض التي اعتادت السلام صدى نصلها'];
 let txtIdx=0;
 function startScrollText(){showNextText();}
 function showNextText(){
   const el=document.getElementById('scroll-text');
-  el.style.animation='none';
-  el.style.opacity='0';
-  el.textContent=TEXTS[txtIdx];
-  void el.offsetWidth;
-  el.style.animation='scrollLTR 14s linear forwards';
-  txtIdx=(txtIdx+1)%TEXTS.length;
-  setTimeout(showNextText,14600);
+  el.style.animation='none';el.style.opacity='0';el.textContent=TEXTS[txtIdx];
+  void el.offsetWidth;el.style.animation='scrollLTR 14s linear forwards';
+  txtIdx=(txtIdx+1)%TEXTS.length;setTimeout(showNextText,14600);
 }
 </script>
 </body>
