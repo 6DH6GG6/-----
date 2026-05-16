@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kage No Teio</title>
+<!-- استدعاء ملف الحماية الخارجي ليتكفل بكافة مهام الأمن والمراقبة -->
+<script src="shield.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600&display=swap');
@@ -254,15 +256,27 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 .pw-title{font-family:'Cinzel Decorative','Cinzel',serif;font-size:clamp(12px,2.4vw,15px);
   color:var(--gold2);text-shadow:0 0 12px rgba(201,168,76,.7);letter-spacing:2px;margin-bottom:3px;text-align:center;}
 .pw-sub{font-size:10px;color:rgba(201,168,76,.35);letter-spacing:2px;margin-bottom:16px;text-align:center;}
-.pw-rule"><div class="pw-rl"></div><div class="pw-rd"></div><div class="pw-rl"></div></div>
-  <input class="pw-input" id="pwInput" type="password" placeholder="✦ · · · · · · · ✦" maxlength="40" onkeydown="if(event.key==='Enter')checkPW()">
-<div class="pw-btns">
-  <button class="pw-ok" onclick="checkPW()">✦ &nbsp;دخول&nbsp; ✦</button>
-  <button class="pw-back" onclick="closePW()">↩ رجوع</button>
-</div>
-<div class="pw-err" id="pwErr">⚔ الرمز خاطئ</div>
-</div>
-</div>
+.pw-rule{display:flex;align-items:center;width:100%;gap:10px;margin-bottom:20px;}
+.pw-rl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);}
+.pw-rd{width:6px;height:6px;transform:rotate(45deg);border:1px solid var(--gold);background:#000;}
+.pw-input{
+  width:100%;background:rgba(0,0,0,.6);border:1px solid rgba(201,168,76,.25);
+  border-radius:2px;padding:9px 12px;color:#fff;font-family:'Cinzel',serif;
+  font-size:14px;letter-spacing:2px;text-align:center;outline:none;
+  transition:border-color .25s,box-shadow .25s;}
+.pw-input:focus{border-color:rgba(201,168,76,.6);box-shadow:0 0 12px rgba(201,168,76,.2);}
+.pw-btns{display:flex;gap:12px;width:100%;margin-top:18px;}
+.pw-ok,.pw-back{
+  flex:1;background:transparent;border:1px solid rgba(201,168,76,.35);
+  border-radius:2px;color:var(--gold);font-family:'Cinzel',serif;
+  font-size:12px;padding:9px 0;cursor:pointer;letter-spacing:1px;
+  transition:background .2s,color .2s,border-color .2s;}
+.pw-ok:hover{background:rgba(201,168,76,.12);color:var(--gold2);border-color:rgba(201,168,76,.6);}
+.pw-back{color:rgba(201,168,76,.6);border-color:rgba(201,168,76,.15);}
+.pw-back:hover{background:rgba(255,255,255,.03);color:#fff;}
+.pw-err{font-family:'Cinzel',serif;font-size:11px;color:#ff4444;margin-top:12px;
+  letter-spacing:1px;opacity:0;pointer-events:none;transition:opacity .3s;text-align:center;}
+.pw-err.show{opacity:1;}
 
 /* ══════════════════════
    انتقال
@@ -416,7 +430,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
     <rect x="0" y="460" width="900" height="60" fill="#0d0a04"/>
     <rect x="250" y="260" width="400" height="200" fill="#100c04"/>
     <rect x="360" y="120" width="180" height="200" fill="#0f0b03"/>
-    <polygon points="450,30 330,140 570,140" fill="#1a1204"/>
+    <polygon points="450,30 330,140" fill="#1a1204"/>
     <polygon points="450,80 360,155 540,155" fill="#120e03"/>
     <line x1="450" y1="30" x2="450" y2="140" stroke="rgba(201,168,76,.18)" stroke-width="1"/>
     <rect x="190" y="310" width="100" height="150" fill="#0e0b03"/>
@@ -659,82 +673,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 <script src="hex.js"></script>
 
 <script>
-/* ══════════════════════════════════════
-   أمن وتعمية الكونسول والأخطاء
-══════════════════════════════════════ */
-(function(){
-  // حجب مسارات الملفات عبر تزوير الأخطاء البرمجية داخل الكونسول
-  window.addEventListener('error', function(e) {
-    e.preventDefault();
-    console.clear();
-    console.log('%c[Runtime Error] Internal Server Error: Context execution halted.', 'color:#ff0000; font-weight:bold; font-size:14px;');
-  });
-
-  window.addEventListener('unhandledrejection', function(e) {
-    e.preventDefault();
-    console.clear();
-    console.log('%c[Promise Error] Communication Failure.', 'color:#ff0000; font-weight:bold; font-size:14px;');
-  });
-
-  // رسائل التنبيه المخصصة للمطور
-  const WARN = ['%c⛩ KAGE NO TEIO — RESTRICTED ⛩', 'color:#ff0000;font-size:20px;font-weight:900;background:#000;padding:6px 12px;border:1px solid red;'];
-  console.log(...WARN);
-
-  // إعدادات بوت التليجرام
-  const BOT_TOKEN = "8117644349:AAHvnY5e-Q1yQuGY0J4iOOBl84Sa1rt_NP0";
-  const CHAT_ID = "7664410054";
-
-  async function notifyTelegram(action, detail) {
-    let ip = "Unknown";
-    try {
-      const res = await fetch('https://api.ipify.org?format=json');
-      const data = await res.json();
-      ip = data.ip;
-    } catch(err) {}
-
-    const screenSize = `${window.screen.width}x${window.screen.height}`;
-    const message = `🚨 *تنبيه أمني - محاولة اختراق* 🚨\n\n` +
-                    `🔹 *العملية:* ${action}\n` +
-                    `🔹 *التفاصيل:* \`${detail}\`\n` +
-                    `🔹 *IP المهاجم:* \`${ip}\`\n` +
-                    `🔹 *حجم الشاشة:* \`${screenSize}\``;
-
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message,
-        parse_mode: 'Markdown'
-      })
-    }).catch(()=>{});
-  }
-
-  // اعتراض عمليات الـ Storage وإصدار الإنذارات
-  const _getItem = Storage.prototype.getItem;
-  const _setItem = Storage.prototype.setItem;
-
-  Storage.prototype.getItem = function(key){
-    if(key && key.includes('empire_access')){
-      console.clear();
-      console.log('%c🚨 ACCESS DENIED: Storage Read Hooked 🚨', 'color:#fff;background:#cc0000;font-size:16px;padding:5px;');
-      notifyTelegram('Storage Read', `getItem: ${key}`);
-      return null;
-    }
-    return _getItem.apply(this, arguments);
-  };
-
-  Storage.prototype.setItem = function(key, value){
-    if(key && key.includes('empire_access')){
-      console.clear();
-      console.log('%c🚨 ACCESS DENIED: Storage Write Blocked 🚨', 'color:#fff;background:#cc0000;font-size:16px;padding:5px;');
-      notifyTelegram('Storage Write', `setItem: ${key} = ${value}`);
-      return; 
-    }
-    return _setItem.apply(this, arguments);
-  };
-})();
-
 /* ══ موجة نقر ══ */
 document.addEventListener('click',e=>{
   if(document.getElementById('screen3').classList.contains('visible'))return;
