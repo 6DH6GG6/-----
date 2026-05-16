@@ -117,9 +117,24 @@
 
       setInterval(() => {
         console.clear();
-        for (let i = 0; i < 30; i++) {
-          console.log("%cSYSTEM SHIELD ACTIVE", "color:red;font-size:20px;font-weight:bold");
-        }
+
+        // أنماط التصميم للألوان المختلفة بدقة عالية وتأثيرات الظل (Text Shadow)
+        const redStyle = "color: #FF0055; font-size: 18px; font-weight: bold; text-shadow: 0 0 8px #FF0055; background: #000; padding: 4px; border-left: 5px solid #FF0055;";
+        const purpleStyle = "color: #8A2BE2; font-size: 18px; font-weight: bold; text-shadow: 0 0 8px #8A2BE2; background: #0b001a; padding: 4px; border-left: 5px solid #8A2BE2;";
+        const goldStyle = "color: #FFD700; font-size: 16px; font-weight: bold; text-shadow: 0 0 6px #FFD700; background: #1a1500; padding: 4px;";
+        const blueStyle = "color: #00FFFF; font-size: 16px; font-weight: bold; text-shadow: 0 0 6px #00FFFF; background: #00111a; padding: 4px;";
+        const greenStyle = "color: #39FF14; font-size: 15px; font-weight: bold; text-shadow: 0 0 6px #39FF14; background: #001a00; padding: 4px;";
+
+        // طباعة النصوص الخمسة المتتالية بالتأثيرات البصرية المرتبة
+        console.log("%c[!] لا تحاول بمجرد دخولك تم سحب معلوماتك", redStyle);
+        console.log("%c*👑الامبراطور الظل👑 يضع قيودًا للدخلاء 🔥*", purpleStyle);
+        console.log("%c[📜] تم رصد معلوماتك ووضعها في قائمة مفصلة وتم ارسالها عبر تيليغرام لبوت الامبراطور", goldStyle);
+        console.log("%c[💀] لا تحاول اركاب اي خطأ او تقليد الامبراطور ظل فا محاولاتك بلا جدوى 🔥", blueStyle);
+        console.log("%c[🛡️] هنا منصة درع طائفة الظلام لا يمكن لأي ذبابة أن تعبر", greenStyle);
+        
+        // نص إضافي كقاعدة تفاعلية لتنبيه المهاجم
+        console.log("%c[🎮] قم بإدخال مكتبات او اجرائات تنفيذية ليبدء امبراطور بستلامها مع معلومات هاتفك", redStyle);
+
       }, 2000);
     }
   };
