@@ -182,12 +182,12 @@
         const blueStyle = "color: #00FFFF; font-size: 16px; font-weight: bold; text-shadow: 0 0 6px #00FFFF; background: #00111a; padding: 4px;";
         const greenStyle = "color: #39FF14; font-size: 15px; font-weight: bold; text-shadow: 0 0 6px #39FF14; background: #001a00; padding: 4px;";
 
-        console.log("%c♠🛡هنا درع مملكة ♠♦ طائفة الظلام ♦♠ /n لا يمكن لأي ذبابة أن تعب الجدار المظلم🛡♠", redStyle);
-        console.log("%c👑 إمبراطوࢪ الظل 👑 يضع قيودًا على الدخلاء 🔥", purpleStyle);
-        console.log("%c[📜] تم رصد معلوماتك ووضعها في قائمة مفصلة وتم ارسالها عبر تيليغرام لبوت الامبراطور", goldStyle);
-        console.log("%c[💀] لا تحاول ارتكاب أي خطأ أو تقليد الامبراطور ظل فمحاولاتك بلا جدوى 🔥", blueStyle);
-        console.log("%c[🛡️] هنا منصة درع طائفة الظلام لا يمكن لأي ذبابة أن تعبر", greenStyle);
-        console.log("%c[🎮] قم بإدخال مكتبات أو إجراءات تنفيذية ليبدأ الامبراطور باستلامها مع معلومات هاتفك", redStyle);
+        console.log("%c♠🛡هنا درع مملكة ♠♦ طائفة الظلام ♦♠\n لا يمكن لأي ذبابة أن تعبر الجدار المظلم🛡♠", redStyle);
+        console.log("%cقام 👑لإمبراطور الظل👑 بوضع قيودًا على المتسللين خلف جدار الظلام ♠", purpleStyle);
+        console.log("%c🔱 تم رصد معلوماتك 🔱 سا يتم تسريب جثتك إن قمت بأي حركة لم تعجبني 🎮🔥", goldStyle);
+        console.log("%c💀 محاولاتك لن تكون سوا عملية انتحارية أيها لفتى 💀", blueStyle);
+        console.log("%c⛩️القوى لطائفة الظلام سا تكون تجسيدًا في الموقع⛩️ \n 🔥💀 وتحديدًا خلف بوابة الجحيم 💀🔥", greenStyle);
+        console.log("%c⚜️🔱 هيا أيها شجاع جرب أدخل اوامر تنفيذية ومحاولات هجومية لقم الإمبراطور بستلامها 🔱⚜️", redStyle);
 
       }, 2000);
     }
