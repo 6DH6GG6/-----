@@ -7,7 +7,7 @@
 <title>Kage No Teio</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght=700;900&family=Cinzel:wght=400;600&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght=700;900&family=Cinzel:wght=400;600&family=Cairo:wght=400;700&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════
    VARIABLES & RESET
@@ -18,7 +18,6 @@
   --purple:#9b30ff; --purple2:#cc88ff;
   --s1-bg:radial-gradient(ellipse 80% 55% at 50% 0%,#1a0a2e 0%,#0d0118 45%,#04000a 100%);
   --s2-bg:radial-gradient(ellipse 60% 45% at 50% 0%,#2a003a 0%,#120020 40%,#000 100%);
-  --s3-bg: radial-gradient(circle at 50% 50%, #140226 0%, #080014 60%, #010005 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Cinzel',serif}
@@ -100,7 +99,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   50%{filter:drop-shadow(0 0 18px rgba(201,168,76,.95)) drop-shadow(0 0 35px rgba(255,160,0,.4))}}
 
 /* ══════════════════════════════════════
-   LOADER (المحدث)
+   LOADER
 ══════════════════════════════════════ */
 #loader-overlay{
   position:fixed;inset:0;z-index:30;
@@ -238,7 +237,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 @keyframes errShake{0%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}100%{transform:translateX(0)}}
 
 /* ══════════════════════════════════════
-   THUNDER MENU — القائمة الذهبية المحدثة
+   THUNDER MENU
 ══════════════════════════════════════ */
 #thunder-menu{
   position:fixed;inset:0;z-index:60;
@@ -292,7 +291,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   margin-bottom:clamp(18px,4vh,36px);
 }
 
-/* أزرار القائمة */
 .tm-btns{display:flex;flex-direction:column;gap:clamp(7px,1.5vh,14px);width:100%;align-items:center}
 .tm-btn{
   position:relative;width:min(540px,94vw);
@@ -323,9 +321,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   color:#fff;
 }
 .tm-btn:active{transform:scale(.97)}
-.tm-btn-ic{margin-left:.5em;font-size:1.1em;vertical-align:middle}
 
-/* بار تحميل تحت الأزرار */
 .tm-prog-wrap{
   width:min(540px,94vw);height:2px;
   background:rgba(201,168,76,.08);
@@ -338,135 +334,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   box-shadow:0 0 14px var(--gold);
   transition:width .05s linear;
 }
-
-/* ══════════════════════════════════════
-   SCREEN 3 — الواجهة الرئيسية الفضائية الثابتة
-══════════════════════════════════════ */
-#screen3{
-  position:fixed;inset:0;z-index:5;
-  opacity:0;pointer-events:none;
-  transition:opacity 1.2s ease;overflow:hidden;
-  background: var(--s3-bg);
-}
-#screen3.visible{opacity:1;pointer-events:auto}
-
-/* سماء النجوم الثابتة كصورة خلفية */
-#s3-stars-static {
-  position: absolute;inset: 0;z-index: 0;pointer-events: none;
-  background-image: 
-    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
-    radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 20px);
-  background-size: 550px 550px, 350px 350px, 250px 250px;
-  background-position: 0 0, 40px 60px, 130px 270px;
-  opacity: 0.45;
-}
-
-/* نجم شيطاني سداسي كخلفية كبيرة هندسية */
-#s3-bg-pentagram{
-  position:absolute;inset:0;z-index:1;
-  display:flex;align-items:center;justify-content:center;pointer-events:none;
-}
-#s3-bg-pentagram svg{
-  width:min(92vmin,920px);height:min(92vmin,920px);
-  opacity:.12;animation:bgPentRot 130s linear infinite;
-  filter:drop-shadow(0 0 35px rgba(160,0,0,.5));
-}
-@keyframes bgPentRot{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-/* النجم السداسي التفاعلي المركزي المهندس خطيًا */
-#s3-star-svg{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:clamp(320px,65vmin,640px);height:clamp(320px,65vmin,640px);
-  z-index:3;pointer-events:none;
-  animation:starRotateLoop 25s linear infinite;
-}
-@keyframes starRotateLoop {
-  from { transform: translate(-50%,-50%) rotate(0deg); }
-  to { transform: translate(-50%,-50%) rotate(360deg); }
-}
-
-/* الشيطان */
-#s3-demon{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  z-index:4;pointer-events:none;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  animation:demonFloat 4.5s ease-in-out infinite;
-}
-@keyframes demonFloat{0%,100%{transform:translate(-50%,-50%) translateY(0)}50%{transform:translate(-50%,-50%) translateY(-10px)}}
-.demon-trident{
-  font-size:clamp(30px,6.5vmin,60px);line-height:1;
-  filter:drop-shadow(0 0 14px rgba(255,0,0,.8));
-  margin-bottom:2px;
-}
-.demon-face{font-size:clamp(46px,9.5vmin,84px);line-height:1;filter:drop-shadow(0 0 20px rgba(200,0,0,.7));}
-
-/* برق S3 */
-#s3-lightning{position:absolute;inset:0;z-index:2;pointer-events:none}
-.s3-halo{position:absolute;inset:0;z-index:5;pointer-events:none;animation:haloBreath 2.4s ease-in-out infinite;}
-@keyframes haloBreath{0%,100%{box-shadow:inset 0 0 90px rgba(155,0,0,.12)}50%{box-shadow:inset 0 0 170px rgba(220,0,0,.26)}}
-
-/* شريط القائمة العلوي الفارغ بدون أزرار */
-#s3-nav{
-  position:absolute;top:0;left:0;right:0;
-  height:clamp(40px,6.5vh,56px);z-index:9;
-  display:none;align-items:center;overflow-x:auto;overflow-y:hidden;
-  background:rgba(0,0,0,.62);
-  border-bottom:1px solid rgba(201,168,76,.2);
-}
-#s3-nav.show{display:flex}
-
-/* المحتوى */
-#s3-content{
-  position:absolute;inset:0;z-index:8;overflow-y:auto;overflow-x:hidden;
-  display:flex;flex-direction:column;align-items:center;
-  padding:clamp(10px,1.8vh,20px);pointer-events:none;
-}
-#s3-logo{display:flex;align-items:center;justify-content:center;width:100%;padding:clamp(6px,1.2vh,14px) 0}
-#s3-logo img{
-  max-height:clamp(60px,14vh,140px);max-width:clamp(160px,34vw,340px);
-  object-fit:contain;filter:drop-shadow(0 0 18px rgba(255,0,0,.5));opacity:.92;
-}
-#s3-slot-panels{width:100%;max-width:760px;pointer-events:auto}
-.s3-panel{width:100%;background:rgba(0,0,0,.7);border:1px solid rgba(201,168,76,.22);border-radius:4px;padding:20px;display:none;}
-.s3-panel.active{display:block}
-
-/* ══════════════════════════════════════
-   HEXAGONAL GRID — توزيع متناسق وثابت على الرؤوس الستة
-══════════════════════════════════════ */
-#s3-hex-grid{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:clamp(320px,65vmin,640px);height:clamp(320px,65vmin,640px);
-  z-index:10;display:none;
-}
-#s3-hex-grid.show{display:block}
-
-.hex-btn{
-  position:absolute;
-  width:clamp(75px,15vmin,120px);height:clamp(75px,15vmin,120px);
-  transform:translate(-50%,-50%);cursor:pointer;
-  background:transparent;border:none;outline:none;
-  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-  transition:filter .3s,transform .25s;pointer-events:auto;
-}
-.hex-btn img{width:65%;height:65%;object-fit:contain;filter:drop-shadow(0 0 8px rgba(201,168,76,.6));display:block;}
-.hex-btn:hover{filter:drop-shadow(0 0 22px rgba(201,168,76,.95)) brightness(1.3);transform:translate(-50%,-50%) scale(1.1);}
-.hex-label{
-  font-family:'Cinzel',serif;font-size:clamp(7px,1.2vmin,10px);
-  color:var(--gold2);text-shadow:0 0 8px rgba(201,168,76,.8);text-align:center;white-space:nowrap;
-}
-
-/* توزيع هندسي مثالي متطابق مع رؤوس النجم السداسي */
-.hex-btn:nth-child(1){left:50%;top:0%}    /* الرأس العلوي الشمالي */
-.hex-btn:nth-child(2){left:93.3%;top:25%} /* الرأس الشرقي العلوي */
-.hex-btn:nth-child(3){left:93.3%;top:75%} /* الرأس الشرقي السفلي */
-.hex-btn:nth-child(4){left:50%;top:100%}  /* الرأس السفلي الجنوبي */
-.hex-btn:nth-child(5){left:6.7%;top:75%}  /* الرأس الغربي السفلي */
-.hex-btn:nth-child(6){left:6.7%;top:25%}  /* الرأس الغربي العلوي */
 
 /* ══════════════════════════════════════
    TRANSITIONS
@@ -556,7 +423,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   </div>
 </div>
 
-<!-- ════ THUNDER MENU — خياران عند الضغط ════ -->
+<!-- ════ THUNDER MENU ════ -->
 <div id="thunder-menu">
   <canvas id="tm-lightning"></canvas>
   <div class="tm-inner">
@@ -572,43 +439,6 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
   </div>
 </div>
 
-<!-- ════ SCREEN 3 ════ -->
-<div id="screen3">
-  <div id="s3-black" style="position:absolute;inset:0;z-index:99;background:#000;transition:opacity 1.2s ease;pointer-events:none;"></div>
-  <div id="s3-stars-static"></div>
-
-  <!-- خلفية النجم السداسي الهندسي الكبير -->
-  <div id="s3-bg-pentagram">
-    <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" fill="none">
-      <circle cx="400" cy="400" r="390" stroke="rgba(180,0,0,.4)" stroke-width="1.5" stroke-dasharray="8 6"/>
-      <polygon points="400,60 694,570 106,570" stroke="rgba(210,0,0,.6)" stroke-width="2"/>
-      <polygon points="400,740 106,230 694,230" stroke="rgba(210,0,0,.6)" stroke-width="2"/>
-      <circle cx="400" cy="400" r="15" fill="rgba(220,0,0,.4)"/>
-    </svg>
-  </div>
-
-  <!-- النجم السداسي المركزي التفاعلي المحتضن للأزرار الستة على رؤوسه -->
-  <svg id="s3-star-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"></svg>
-
-  <!-- الشيطان -->
-  <div id="s3-demon">
-    <div class="demon-trident">🔱</div>
-    <div class="demon-face">😈</div>
-  </div>
-
-  <canvas id="s3-lightning"></canvas>
-  <div class="s3-halo"></div>
-  <nav id="s3-nav"></nav>
-
-  <div id="s3-content">
-    <div id="s3-logo"><img src="logo.png" alt="شعار" onerror="this.style.display='none'"></div>
-    <div id="s3-slot-panels"></div>
-  </div>
-
-  <!-- شبكة الأزرار الستة الموزعة على رؤوس النجم السداسي - ثابتة ولا تدور -->
-  <div id="s3-hex-grid"></div>
-</div>
-
 <!-- ════ AUDIO ════ -->
 <audio id="sfx-open"  src="open.ogg"  preload="auto"></audio>
 <audio id="sfx-music" src="music.ogg" loop preload="auto"></audio>
@@ -618,7 +448,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Ci
 'use strict';
 
 /* ══════════════════════════════════
-   SOUND MANAGER — مدير الصوتيات الموحد
+   SOUND MANAGER
 ══════════════════════════════════ */
 var SoundManager = {
   playClick: function() {
@@ -661,20 +491,17 @@ var SoundManager = {
 
   document.getElementById('s1-gate-btn').addEventListener('click',function(e){
     SoundManager.playClick();
-    
-    // تأثير هالة الضغط الدائرية
     var wr=document.createElement('div');wr.className='wave-ring';
     wr.style.cssText='left:'+e.clientX+'px;top:'+e.clientY+'px;width:60px;height:60px;margin-left:-30px;margin-top:-30px;';
     document.body.appendChild(wr);setTimeout(function(){wr.remove();},950);
     
-    // إظهار واجهة التحميل الفخمة
     var loaderOverlay = document.getElementById('loader-overlay');
     var loaderBar = document.getElementById('loader-bar');
     var loaderPct = document.getElementById('loader-pct');
     loaderOverlay.classList.add('show');
     
     var progress = 0;
-    var duration = 2500; // مدة التحميل بالملي ثانية (ثانيتين ونصف لتنسجم مع بناء البوابة)
+    var duration = 2500;
     var intervalTime = 20;
     var step = (100 / (duration / intervalTime));
     
@@ -683,8 +510,6 @@ var SoundManager = {
       if(progress >= 100){
         progress = 100;
         clearInterval(loadIv);
-        
-        // الانتقال الفعلي بعد اكتمال التحميل تماماً
         document.getElementById('screen1').classList.add('fade-out');
         loaderOverlay.style.display = 'none';
         
@@ -739,7 +564,7 @@ var TM=(function(){
     if(key==='enter') {
       Screen2.openGate();
     } else if(key==='index2') {
-      window.location.href = 'index2.html';
+      window.location.href = 'enter.js';
     }
   }
   return{show:show,hide:hide,pick:pick};
@@ -897,7 +722,10 @@ window.Screen2=(function(){
         bc.classList.add('show');
         setTimeout(function(){
           var s2=document.getElementById('screen2');if(s2) { s2.classList.add('fade-out'); s2.style.display='none'; }
-          if(window.Screen3&&window.Screen3._activate) window.Screen3._activate();
+          // هنا يتم استدعاء الكود الخارجي المسار المخصص لزر الدخول
+          var s = document.createElement('script');
+          s.src = 'enter.js';
+          document.head.appendChild(s);
           SoundManager.playMusic();
           setTimeout(function(){bc.classList.remove('show');setTimeout(function(){pc.classList.remove('show');},600);},500);
         },400);
@@ -908,122 +736,9 @@ window.Screen2=(function(){
   function init(){initEmbers();initThree();}
   return{init:init,openGate:openGate,closePW:closePW,checkPW:checkPW,onGateClick:onGateClick};
 })();
-
-/* ══════════════════════════════════
-   SCREEN 3 — واجهة النجم السداسي المستقرة
-══════════════════════════════════ */
-window.Screen3=window.KageScreen3=(function(){
-  var _navSlots=[],_hexSlots=[],_ready=false,_activeNav=null;
-  var lcv=document.getElementById('s3-lightning'),lctx=lcv?lcv.getContext('2d'):null;
-  var LW,LH,lBolts=[],lActive=false,lLast=0;
-
-  function resizeL(){if(!lcv)return;LW=lcv.width=window.innerWidth;LH=lcv.height=window.innerHeight;}
-  window.addEventListener('resize',resizeL);resizeL();
-  
-  function spawnL(){
-    var pts=[],sx=Math.random()*LW,sy=Math.random()*LH*.15,ex=Math.random()*LW,ey=LH*.5+Math.random()*LH*.3;
-    pts.push({x:sx,y:sy});
-    for(var i=1;i<8;i++){var p=i/8;pts.push({x:(sx+(ex-sx)*p)+(Math.random()-.5)*50,y:(sy+(ey-sy)*p)+(Math.random()-.5)*50});}
-    pts.push({x:ex,y:ey});return{pts:pts,life:1};
-  }
-  
-  function lLoop(now){
-    if(!lActive||!lctx)return;lctx.clearRect(0,0,LW,LH);
-    if(now-lLast>=1600){lBolts.push(spawnL());lLast=now;}
-    for(var i=lBolts.length-1;i>=0;i--){
-      var b=lBolts[i];lctx.beginPath();lctx.moveTo(b.pts[0].x,b.pts[0].y);
-      for(var j=1;j<b.pts.length;j++) lctx.lineTo(b.pts[j].x,b.pts[j].y);
-      lctx.strokeStyle='rgba(230,0,0,'+b.life+')';lctx.lineWidth=2;lctx.stroke();b.life-=.04;if(b.life<=0)lBolts.splice(i,1);
-    }
-    requestAnimationFrame(lLoop);
-  }
-
-  function buildStar(){
-    var svg=document.getElementById('s3-star-svg');if(!svg||svg.childElementCount>0)return;
-    var NS='http://www.w3.org/2000/svg';
-    function el(tag,a){var e=document.createElementNS(NS,tag);Object.keys(a).forEach(function(k){e.setAttribute(k,a[k]);});return e;}
-
-    svg.appendChild(el('circle',{cx:'200',cy:'200',r:'180',fill:'none',stroke:'rgba(255,0,0,0.8)','stroke-width':'1.5'}));
-    svg.appendChild(el('circle',{cx:'200',cy:'200',r:'135',fill:'none',stroke:'rgba(255,0,0,0.4)','stroke-width':'1'}));
-
-    svg.appendChild(el('polygon',{points:'200,20 355,290 45,290',fill:'none',stroke:'rgba(255,0,0,0.95)','stroke-width':'2.5','stroke-linejoin':'round'}));
-    svg.appendChild(el('polygon',{points:'200,380 45,110 355,110',fill:'none',stroke:'rgba(255,0,0,0.95)','stroke-width':'2.5','stroke-linejoin':'round'}));
-
-    svg.appendChild(el('circle',{cx:'200',cy:'200',r:'8',fill:'rgba(255,0,0,1)'}));
-    svg.appendChild(el('circle',{cx:'200',cy:'200',r:'3',fill:'#ffffff'}));
-  }
-
-  function injectScript(src) {
-    var old = document.querySelector('script[src="'+src+'"]');
-    if(!old) {
-      var s = document.createElement('script');
-      s.src = src;
-      document.head.appendChild(s);
-    }
-  }
-
-  function renderHex(){
-    var grid=document.getElementById('s3-hex-grid');if(!grid)return;
-    grid.innerHTML='';if(_hexSlots.length===0){grid.classList.remove('show');return;}
-    grid.classList.add('show');
-    _hexSlots.slice(0,6).forEach(function(slot){
-      var btn=document.createElement('div');btn.className='hex-btn';
-      var imgH=slot.img?'<img src="'+slot.img+'" alt="'+slot.label+'" onerror="this.style.display=\'none\'">':'';
-      btn.innerHTML=imgH+'<span class="hex-label">'+slot.label+'</span>';
-      btn.addEventListener('click',function(){
-        SoundManager.playClick();
-        if(slot.script) injectScript(slot.script);
-        if(typeof slot.onClick==='function')slot.onClick();
-      });
-      grid.appendChild(btn);
-    });
-  }
-
-  function renderNav(){
-    var nav=document.getElementById('s3-nav');if(!nav)return;nav.innerHTML='';
-    if(_navSlots.length===0){nav.classList.remove('show');return;}
-    nav.show;
-  }
-
-  function openNav(key){
-    _activeNav=key;
-    var pa=document.getElementById('s3-slot-panels');if(!pa)return;
-    pa.querySelectorAll('.s3-panel').forEach(function(p){p.classList.remove('active');});
-    var slot=_navSlots.find(function(s){return s.key===key;});if(!slot)return;
-    var ex=pa.querySelector('[data-slot="'+key+'"]');
-    if(ex){ex.classList.add('active');}
-    else{var panel=document.createElement('div');panel.className='s3-panel active';panel.setAttribute('data-slot',key);pa.appendChild(panel);if(typeof slot.onOpen==='function')slot.onOpen(panel);}
-  }
-
-  function activate(){
-    var s3=document.getElementById('screen3');if(!s3)return;
-    s3.classList.add('visible');
-    var b=document.getElementById('s3-black');if(b){setTimeout(function(){b.style.opacity='0';setTimeout(function(){b.remove();},1300);},200);}
-    
-    buildStar();_ready=true;
-    
-    _hexSlots = [];
-    [
-      {img:'btn1.png', label:'الأعضاء',  script:'btn1.js', onClick:function(){openNav('members');}},
-      {img:'btn2.png', label:'النقابة',  script:'btn2.js', onClick:function(){openNav('guild');}},
-      {img:'btn3.png', label:'الإعلانات',script:'btn3.js', onClick:function(){openNav('news');}},
-      {img:'btn4.png', label:'المتجر',   script:'btn4.js', onClick:function(){openNav('shop');}},
-      {img:'btn5.png', label:'الرتب',    script:'btn5.js', onClick:function(){openNav('rank');}},
-      {img:'btn6.png', label:'الإعدادات',script:'btn6.js', onClick:function(){openNav('settings');}},
-    ].forEach(function(d){_hexSlots.push(d);});
-    
-    renderNav();renderHex();lActive=true;lLast=0;requestAnimationFrame(lLoop);
-  }
-
-  function addNav(cfg){_navSlots.push(cfg);if(_ready)renderNav();}
-  return{addNav:addNav,openNav:openNav,_activate:activate};
-})();
-
-window.Screen3.addNav({key:'members',label:'قائمة الأعضاء',icon:'👥',onOpen:function(p){p.innerHTML='<h3 style="color:#c9a84c;margin-bottom:10px">فيلق الظلال</h3><p style="color:#fff;font-size:13px">مرحباً بك يا إمبراطور، هنا تظهر لوحة التحكم والتحليل الخاص ببيانات أعضاء المملكة الداخليين.</p>';}});
-window.Screen3.addNav({key:'guild',label:'شؤون النقابة',icon:'🛡️',onOpen:function(p){p.innerHTML='<h3 style="color:#c9a84c;margin-bottom:10px">التحالفات السرية</h3><p style="color:#fff;font-size:13px">النقابة قائمة ومستقرة، كافة جدران الحماية مفعلة وجاهزة لرصد أي نشاط خارجي.</p>';}});
 </script>
 
-<script src="1.js"></script>
+<script src="shield_slaim.js"></script>
 <script src="2.js"></script>
 <script src="3.js"></script>
 </body>
