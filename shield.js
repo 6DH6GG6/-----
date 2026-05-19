@@ -182,12 +182,7 @@
         const blueStyle = "color: #00FFFF; font-size: 16px; font-weight: bold; text-shadow: 0 0 6px #00FFFF; background: #00111a; padding: 4px;";
         const greenStyle = "color: #39FF14; font-size: 15px; font-weight: bold; text-shadow: 0 0 6px #39FF14; background: #001a00; padding: 4px;";
 
-        console.log("%c♠🛡هنا درع مملكة ♠♦ طائفة الظلام ♦♠\n لا يمكن لأي ذبابة أن تعبر الجدار المظلم🛡♠", redStyle);
-        console.log("%cقام 👑لإمبراطور الظل👑 بوضع قيودًا على المتسللين خلف جدار الظلام ♠", purpleStyle);
-        console.log("%c🔱 تم رصد معلوماتك 🔱 سا يتم تسريب جثتك إن قمت بأي حركة لم تعجبني 🎮🔥", goldStyle);
-        console.log("%c💀 محاولاتك لن تكون سوا عملية انتحارية أيها لفتى 💀", blueStyle);
-        console.log("%c⛩️القوى لطائفة الظلام سا تكون تجسيدًا في الموقع⛩️ \n 🔥💀 وتحديدًا خلف بوابة الجحيم 💀🔥", greenStyle);
-        console.log("%c⚜️🔱 هيا أيها شجاع جرب أدخل اوامر تنفيذية ومحاولات هجومية لقم الإمبراطور بستلامها 🔱⚜️", redStyle);
+        
 
       }, 2000);
     }
@@ -206,5 +201,136 @@
   SHIELD_ROUTING["prototype_protect.js"]();
   SHIELD_ROUTING["variable_scanner.js"]();
   SHIELD_ROUTING["execution_guard.js"]();
+
+})();
+/**
+ * slime-shield.js - نسخة درع السلايم (التحذير اللانهائي وحجب المسارات)
+ * نظام حماية الواجهة الأمامية وإعاقة فحص الكود
+ */
+
+(function() {
+    'use strict';
+
+    // إعدادات بوت التليجرام لإرسال التنبيهات
+    const TG_TOKEN = "8117644349:AAHvnY5e-Q1yQuGY0J4iOOBl84Sa1rt_NP0";
+    const TG_CHAT_ID = "7664410054";
+    let alertSent = false;
+
+    function sendAlertToTelegram(message) {
+        if (alertSent) return; // منع تكرار إرسال التنبيهات للبوت بشكل مفرط أثناء حلقة التكرار السريعة
+        alertSent = true;
+        
+        const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`;
+        const payload = {
+            chat_id: TG_CHAT_ID,
+            text: `⚠️ [تنبيه درع السلايم]: ${message}\nالوقت: ${new Date().toISOString()}`
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).catch(() => { /* حماية قنوات الاتصال */ });
+        
+        // إعادة تفعيل الإرسال بعد 10 ثوانٍ في حال حدوث محاولة أخرى منفصلة
+        setTimeout(() => { alertSent = false; }, 10000);
+    }
+
+    // 1. تفعيل وضع التحذير السريع والمستمر (Console Flooding)
+    // عند استدعاء هذه الدالة، تمتلئ شاشة الكونسول بالرسائل الملونة بسرعة فائقة لمنع المتسلل من القراءة
+    function startWarningFlood() {
+        setInterval(() => {
+            // كود التنسيق اللوني لرسائل الإمبراطورية
+            const styleWarning = `color: #ff0033; font-size: 14px; font-weight: bold; background: #0a0003; padding: 4px; border: 1px solid #ff0033; text-shadow: 0 0 8px #ff0000;`;
+            const styleBanner = `color: #9b30ff; font-size: 16px; font-weight: bold; background: #020005; padding: 6px; text-shadow: 0 0 10px #9b30ff;`;
+
+            console.log("%c🛡️ [درع السلايم]: ضربة السلايم القاطعة منبثقة الآن بالمرصاد! 🛡️", styleBanner);
+            console.log("%c🚨 [تحذير كاشف]: تم رصد محاولة اختراق الكواليس. النظام مغلق تماماً وجميع المسارات محجوبة.", styleWarning);
+            
+            // حجب تفاصيل الخطأ والمسارات (StackTrace) عبر إلقاء أخطاء فارغة مخصصة لا تحتوي على مسار الملف
+            const fakeError = new Error("");
+            fakeError.stack = "ProtectedBySlimeShield: Access Denied";
+            console.error(fakeError.stack);
+            
+        }, 5); // التنفيذ كل 5 أجزاء من الألف من الثانية لضمان السرعة الفائقة
+    }
+
+    // 2. إعاقة أدوات المطورين باستخدام حلقة ديباجر مستمرة (Anti-Debugging)
+    function activateAntiDebug() {
+        function debuggerLoop() {
+            try {
+                (function() {
+                    return function(idx) {
+                        if ((idx + '').length !== 1 || idx % 20 === 0) {
+                            (function() { return true; }).constructor('debugger')();
+                        } else {
+                            (function() { return false; }).constructor('debugger')();
+                        }
+                    }(0);
+                }());
+            } catch (e) {}
+            setTimeout(debuggerLoop, 50);
+        }
+        debuggerLoop();
+    }
+
+    // 3. تعطيل وحظر التلاعب بـ LocalStorage و SessionStorage وحجب قيمها
+    const blockStorage = () => {
+        try {
+            Object.defineProperty(window, 'localStorage', { 
+                get: function() { 
+                    sendAlertToTelegram("محاولة قراءة أو حقن قيم في الـ LocalStorage.");
+                    return null; 
+                }, 
+                configurable: false 
+            });
+            Object.defineProperty(window, 'sessionStorage', { 
+                get: function() { 
+                    sendAlertToTelegram("محاولة قراءة أو حقن قيم في الـ SessionStorage.");
+                    return null; 
+                }, 
+                configurable: false 
+            });
+        } catch (e) {
+            Storage.prototype.getItem = function() { return null; };
+            Storage.prototype.setItem = function() { return null; };
+        }
+    };
+
+    // 4. السيطرة على الكونسول وبدء الإغراق اللانهائي
+    const secureConsole = () => {
+        // بدء تدفق التحذيرات بسرعة فائقة فور تشغيل الملف
+        startWarningFlood();
+
+        // حظر عمل الدوال القياسية الأخرى لمنع المتسلل من إدخال أوامر مخصصة
+        const silentLog = function() { return null; };
+        ['info', 'warn', 'dir', 'clear', 'table'].forEach(method => {
+            try {
+                Object.defineProperty(console, method, {
+                    value: silentLog,
+                    writable: false,
+                    configurable: false
+                });
+            } catch (e) {}
+        });
+    };
+
+    // 5. رصد اختصارات لوحة المفاتيح لمنع فتح الأدوات برمجياً من البداية
+    window.addEventListener('keydown', function(e) {
+        if (
+            e.key === 'F12' || 
+            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+            (e.ctrlKey && e.key === 'U')
+        ) {
+            e.preventDefault();
+            sendAlertToTelegram(`محاولة فتح أدوات المطورين عبر الاختصارات الكيبوردية.`);
+            return false;
+        }
+    });
+
+    // تشغيل المنظومة الدفاعية للدرع
+    blockStorage();
+    secureConsole();
+    activateAntiDebug();
 
 })();
