@@ -1,0 +1,29 @@
+Shadow Engine AI — نظام التصحيح والإضافة الذكية
+│
+├── index.html                  ← الواجهة الرئيسية
+│
+├── core/
+│   ├── تركيب.js               ← محرك التركيب (موجود)
+│   ├── analyzer.js             ← تحليل الكود واكتشاف الأخطاء
+│   └── patcher.js              ← تطبيق التصحيحات تلقائياً
+│
+├── ai/
+│   ├── claude.js               ← التواصل مع Claude API
+│   ├── prompts.js              ← قوالب الـ prompts المتخصصة
+│   └── parser.js               ← تحليل ردود الـ AI
+│
+├── tools/
+│   ├── hex.js                  ← تشفير Hex
+│   ├── base64.js               ← تشفير Base64
+│   ├── decrypt_auto.js         ← فك التشفير التلقائي
+│   ├── format_5lines.js        ← تنسيق 5 أسطر
+│   ├── format_1line.js         ← ضغط سطر واحد
+│   ├── clean_code.js           ← حذف التعليقات
+│   ├── mode_compact.js         ← وضع مضغوط
+│   ├── mode_full.js            ← وضع مفصل
+│   └── generate.js             ← توليد كود
+│
+└── utils/
+    ├── logger.js               ← سجل العمليات
+    ├── storage.js              ← حفظ الكود محلياً
+    └── diff.js                 ← مقارنة قبل/بعد
